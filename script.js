@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Audio elements
     const timerSound = new Audio('timer.mp3');
     const doneSound = new Audio('done.mp3');
+    const zapSound = new Audio('zap.mp3');
     
     // DOM elements - Timer
     const timerElement = document.querySelector('.timer');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentCountElement = document.getElementById('current-count');
     const nextCountElement = document.getElementById('next-count');
     const fillElement = document.getElementById('fill');
+    const wordsLabel = document.querySelector('.words-label');
     
     // Store the original height of the SVG
     const svgHeight = 375;
@@ -60,6 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Initialize the fill element
             updateFillHeight(wordCount);
+            
+            // Initialize the words label based on the starting word count
+            if (wordsLabel) {
+                if (wordCount <= 10) {
+                    wordsLabel.classList.remove('text-blue-800');
+                    wordsLabel.classList.add('text-white');
+                    wordsLabel.style.opacity = '0.6';
+                } else {
+                    wordsLabel.classList.remove('text-white');
+                    wordsLabel.classList.add('text-blue-800');
+                    wordsLabel.style.opacity = '1';
+                }
+            }
         }
     }
     
@@ -91,15 +106,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (count <= 3) {
                     // Red when 3 or fewer words left
                     fillElement.setAttribute('fill', '#ef4444'); // bg-red-500
+                    if (wordsLabel) {
+                        console.log('Setting words label to white/60 (count <= 3)');
+                        wordsLabel.classList.remove('text-blue-800');
+                        wordsLabel.classList.add('text-white');
+                    }
                 } else if (count <= 6) {
                     // Orange when 6 or fewer words left
                     fillElement.setAttribute('fill', '#f97316'); // bg-orange-500
+                    if (wordsLabel) {
+                        console.log('Setting words label to white/60 (count <= 6)');
+                        wordsLabel.classList.remove('text-blue-800');
+                        wordsLabel.classList.add('text-white');
+                    
+                    }
                 } else if (count <= 10) {
                     // Yellow when 10 or fewer words left
                     fillElement.setAttribute('fill', '#eab308'); // bg-yellow-500
+                    if (wordsLabel) {
+                        console.log('Setting words label to white/60 (count <= 10)');
+                        wordsLabel.classList.remove('text-blue-800');
+                        wordsLabel.classList.add('text-white');
+                        
+                    }
                 } else {
                     // Default white
                     fillElement.setAttribute('fill', 'white');
+                    if (wordsLabel) {
+                        console.log('Resetting words label to text-blue-800');
+                        wordsLabel.classList.remove('text-white');
+                        wordsLabel.classList.add('text-blue-800');
+                        wordsLabel.style.opacity = '1';
+                    }
                 }
             }
         }
@@ -275,6 +313,12 @@ document.addEventListener('DOMContentLoaded', function() {
             wordCount--;
             updateCounterDisplay(wordCount);
             
+            // Play the zap sound
+            zapSound.currentTime = 0;
+            zapSound.play().catch(e => {
+                console.log('Error playing zap sound:', e);
+            });
+            
             // Visual feedback for button press
             if (decrementBtn) {
                 decrementBtn.classList.add('active');
@@ -316,6 +360,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Stop the timer sound
         timerSound.pause();
         timerSound.currentTime = 0;
+        
+        // Set all SVG paths to red when game ends
+        for (let i = 1; i <= 45; i++) {
+            const pathElement = document.getElementById(i.toString());
+            if (pathElement) {
+                pathElement.setAttribute('fill', '#ef4444'); // bg-red-500
+                pathElement.setAttribute('fill-opacity', '1');
+            }
+        }
         
         console.log('Game ended!');
     }
