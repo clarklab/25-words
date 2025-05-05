@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tailwind Project</title>
+    <title>25 Words or Less</title>
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="25 Words Game">
+    <meta property="og:description" content="A fun word game with a 45-second timer and 25 words to guess!">
+    <meta property="og:image" content="social.jpeg">
+    <meta property="og:url" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
@@ -12,7 +20,7 @@
 </head>
 <body class="bg-blue-800 w-full h-full bg-[url(bg.png)] bg-cover bg-center">
     
-    <div class="split grid grid-cols-2 w-full h-full">
+    <div class="split grid grid-cols-2 w-full h-full p-6">
         <div class="left w-full h-full flex flex-col items-center justify-center">
             <div class="timer relative w-full h-full">
                 <div class="timer-display absolute w-full h-full flex items-center justify-center z-10">
@@ -21,7 +29,7 @@
                         <div id="next-number" class="next-number absolute w-full text-center">44</div>
                     </div>
                 </div>
-                <svg class="w-full h-full p-12" width="375" height="375" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-full h-full p-6" width="375" height="375" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="circle">
                     <path id="44" d="M172.207 45.8076C168.808 46.1689 165.449 46.6487 162.133 47.2432L154.191 2.9502C158.56 2.16696 162.981 1.53749 167.449 1.0625L172.207 45.8076Z" fill="white" fill-opacity="0.3"/>
                     <path id="43" d="M142.472 52.2471C145.67 51.1831 148.919 50.2301 152.214 49.3916L141.116 5.7832C136.77 6.88918 132.485 8.14814 128.267 9.55176L142.472 52.2471Z" fill="white" fill-opacity="0.3"/>
@@ -80,6 +88,8 @@
                             &nbsp;
                         </button>
                         <div class="w-full h-full">
+                            <div class="words-label absolute w-full text-center text-4xl pt-4 font-bold bottom-2/5 uppercase" style="transform: translateY(100%);">Words</div>
+
                         <div class="counter-wrapper relative h-[1.2em] w-full overflow-hidden text-black text-9xl lg:text-[12rem] font-bold">
                             <div id="current-count" class="current-count absolute w-full text-center" style="transform: translateY(0);">25</div>
                             <div id="next-count" class="next-count absolute w-full text-center" style="transform: translateY(100%);">24</div>
@@ -90,7 +100,7 @@
                         </button>
                     </div>
                 </div>
-                <svg class="w-full h-full p-12" width="375" height="375" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-full h-full p-6" width="375" height="375" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="words">
                 <mask id="mask0_4_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="375" height="375">
                 <circle id="mask" cx="187.5" cy="187.5" r="187.5" fill="white"/>
