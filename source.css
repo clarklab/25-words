@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Timer and Counter animation styles */
+.numbers-wrapper,
+.counter-wrapper {
+  line-height: 1;
+  overflow: hidden;
+  position: relative;
+  height: 1.2em;
+}
+
+.current-number, .next-number,
+.current-count, .next-count {
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* Apply same transition to all number elements */
+.current-number, .next-number,
+.current-count, .next-count {
+  transition: transform 300ms ease-in-out;
+}
+
+.timer-display,
+.counter-display {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure the initial state is correct */
+.next-number,
+.next-count {
+  transform: translateY(100%);
+}
+
+/* Button styles */
+.counter-btn {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Keyboard focus styles */
+.counter-btn:focus {
+  outline: none;
+}
+
+/* SVG fill transitions */
+#fill {
+  transition: height 0.3s ease-in-out, y 0.3s ease-in-out, fill 0.3s ease-in-out;
+  will-change: height, y, fill;
+}
