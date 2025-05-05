@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let wordCount = 25; // Initial word count
     const maxWordCount = 25; // Maximum word count
     
+    // Audio elements
+    const timerSound = new Audio('timer.mp3');
+    const doneSound = new Audio('done.mp3');
+    
     // DOM elements - Timer
     const timerElement = document.querySelector('.timer');
     const currentNumberElement = document.getElementById('current-number');
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Set initial styles
             currentCountElement.style.transition = 'transform 300ms ease-in-out';
-            nextCountElement.style.transition = 'transform 300ms ease-in-out';
+            nextNumberElement.style.transition = 'transform 300ms ease-in-out';
             
             currentCountElement.style.transform = 'translateY(0)';
             nextCountElement.style.transform = 'translateY(100%)';
@@ -109,6 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
         timeRemaining = 45;
         console.log('Game started!');
         
+        // Play the timer sound
+        playTimerSound();
+        
         // Reset the display
         initializeTimerDisplay();
         
@@ -117,6 +124,29 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Start the timer
         timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Function to play the timer sound
+    function playTimerSound() {
+        // Reset the timer sound to the beginning
+        timerSound.currentTime = 0;
+        
+        // Play the timer sound
+        timerSound.play().catch(e => {
+            // Handle any errors (e.g., if user hasn't interacted with the page yet)
+            console.log('Error playing timer sound:', e);
+        });
+    }
+    
+    // Function to play the done sound
+    function playDoneSound() {
+        // Reset the done sound to the beginning
+        doneSound.currentTime = 0;
+        
+        // Play the done sound
+        doneSound.play().catch(e => {
+            console.log('Error playing done sound:', e);
+        });
     }
     
     // Function to update the timer with animation
@@ -143,6 +173,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // If time is up
             if (timeRemaining === 0) {
+                // Play the done sound
+                playDoneSound();
+                
                 setTimeout(endGame, 300); // Wait for animation to complete
             }
         }
@@ -279,6 +312,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function endGame() {
         gameActive = false;
         clearInterval(timerInterval);
+        
+        // Stop the timer sound
+        timerSound.pause();
+        timerSound.currentTime = 0;
+        
         console.log('Game ended!');
     }
     
