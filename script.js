@@ -337,6 +337,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (event.key === 'ArrowDown') {
                 event.preventDefault(); // Prevent page scrolling
                 decrementWordCount();
+            } else if (event.key === ' ' || event.key === 'Spacebar') {
+                event.preventDefault(); // Prevent page scrolling
+                resetGame();
             }
         }
     }
@@ -350,6 +353,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 pathElement.setAttribute('fill-opacity', '0.3');
             }
         }
+    }
+    
+    // Function to reset the game
+    function resetGame() {
+        // End any active game first
+        if (gameActive) {
+            endGame();
+        }
+        
+        // Reset game variables
+        gameActive = false;
+        timeRemaining = 45;
+        wordCount = 25;
+        
+        // Reset timer display
+        initializeTimerDisplay();
+        
+        // Reset counter display
+        initializeCounterDisplay();
+        
+        // Reset all paths to original color
+        resetTimerPaths();
+        
+        // Provide visual feedback for reset
+        const timerElement = document.querySelector('.timer');
+        const counterWrapper = document.querySelector('.counter-wrapper');
+        
+        if (timerElement) {
+            timerElement.classList.add('reset-flash');
+            setTimeout(() => timerElement.classList.remove('reset-flash'), 300);
+        }
+        
+        if (counterWrapper) {
+            counterWrapper.classList.add('reset-flash');
+            setTimeout(() => counterWrapper.classList.remove('reset-flash'), 300);
+        }
+        
+        console.log('Game reset!');
     }
     
     // Function to end the game
@@ -387,6 +428,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (decrementBtn) {
         decrementBtn.addEventListener('click', decrementWordCount);
+    }
+    
+    // Event listener for reset button
+    const resetButton = document.querySelector('.reset');
+    if (resetButton) {
+        resetButton.addEventListener('click', resetGame);
     }
     
     // Add keyboard event listener for arrow keys

@@ -56,3 +56,14 @@ body {
   transition: height 0.3s ease-in-out, y 0.3s ease-in-out, fill 0.3s ease-in-out;
   will-change: height, y, fill;
 }
+
+/* Reset flash animation */
+@keyframes reset-flash {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.reset-flash {
+  animation: reset-flash 300ms ease-in-out;
+}
